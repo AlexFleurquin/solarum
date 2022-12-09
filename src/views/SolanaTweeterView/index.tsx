@@ -12,6 +12,7 @@ import { SolanaLogo } from "components";
 import styles from "./index.module.css";
 import { getTweets, authorFilter, sendTweet } from "./tweets";
 import { useProgram } from "./useProgram";
+import { Header } from "views/Header";
 
 const endpoint = "https://explorer-api.devnet.solana.com";
 
@@ -37,71 +38,52 @@ export const SolanaTweeterView: FC = ({}) => {
   return (
     <div className="container mx-auto max-w-6xl p-8 2xl:px-0">
       <div className={styles.container}>
-        <div className="navbar mb-2 shadow-lg bg-neutral text-neutral-content rounded-box">
-          <div className="flex-none">
-            <button className="btn btn-square btn-ghost">
-              <span className="text-4xl">🐦</span>
-            </button>
-          </div>
-          <div className="flex-1 px-2 mx-2">
-            <div className="text-sm breadcrumbs">
-              <ul className="text-xl">
-                <li>
-                  <Link href="/">
-                    <a>Templates</a>
-                  </Link>
-                </li>
-                <li>
-                  <span className="opacity-40">Solana Twitter</span>
-                </li>
-              </ul>
-            </div>
-          </div>
+        <Header />
 
-          <div className="flex-none">
-            <WalletMultiButton className="btn btn-ghost" />
-          </div>
-        </div>
-
-        <div className="text-center pt-2">
+        <div className="pt-2">
           <div className="hero min-h-16 pt-4">
-            <div className="text-center hero-content">
+            <div className="hero-content">
               <div className="max-w-lg">
-                <h1 className="mb-5 text-5xl">
+                <h1 className="mb-5 font-sans font-bold text-5xl">
                   Solana Twitter <SolanaLogo />
                 </h1>
 
                 <p className="mb-5">
-                  Here is simplified version of Twitter as a Solana dApp. <br />
-                  It aims to be Next.JS UI build for{" "}
+                  Voici une version simplifiée de Twitter en tant que Solana
+                  dApp. <br />
+                  Il vise à être la construction de l'interface utilisateur
+                  Next.JS pour{" "}
                   <a
                     href="https://lorisleiva.com/create-a-solana-dapp-from-scratch"
                     target="_blank"
                     className="link font-bold"
                     rel="noreferrer"
                   >
-                    Create a Solana dApp from scratch
+                    créer un tutoriel Solana dApp de zéro
                   </a>{" "}
-                  tutorial.
                 </p>
 
-                <p>UI connects to DEVNET network.</p>
+                <p className="font-sans text-sm">
+                  L'interface se connecte au Devnet de Solana.
+                </p>
               </div>
             </div>
           </div>
         </div>
 
-        <div className="flex mb-16">
-          <div className="mr-4">Need some SOL on test wallet?</div>
+        <div className="flex my-16">
+          <div className="mr-4 font-sans text-sm">
+            Besoin de SOL sur son portefeuille de test ?
+          </div>
           <div className="mr-4">
             <button
-              className="btn btn-primary normal-case btn-xs"
+              className="btn rounded-lg bg-blue-500 px-2 py-1 text-xs"
               onClick={airdropToWallet}
             >
               Airdrop 1 SOL
             </button>
           </div>
-          {isAirDropped ? <div className="opacity-50">Sent!</div> : null}
+          {isAirDropped ? <div className="opacity-50">Envoyé</div> : null}
         </div>
 
         <div>

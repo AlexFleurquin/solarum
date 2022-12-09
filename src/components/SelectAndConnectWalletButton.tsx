@@ -37,11 +37,11 @@ export const SelectAndConnectWalletButton: FC<Props> = ({
 
   return (
     <button
-      className="btn btn-primary btn-lg"
+      className="font-sans font-light px-4 py-2 text-sm text-gray-900 dark:text-gray-100 bg-white border border-gray-300 dark:border-gray-400 rounded-xl hover:shadow-lg hover:bg-white dark:bg-gray-800 dark:border-gray-700"
       onClick={handleWalletClick}
       disabled={connecting}
     >
-      {publicKey ? <div>Use Wallet Address</div> : <div>Connect Wallet</div>}
+      {publicKey ? <div>Connecté</div> : <div>Connecter</div>}
     </button>
   );
 };

@@ -1,13 +1,13 @@
 import Link from "next/link";
 import { FC, useState } from "react";
 import { useWallet } from "@solana/wallet-adapter-react";
-import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
 import { useWalletNfts, NftTokenAccount } from "@nfteyez/sol-rayz-react";
 import { useConnection } from "@solana/wallet-adapter-react";
 
 import { Loader, SolanaLogo, SelectAndConnectWalletButton } from "components";
 import { NftCard } from "./NftCard";
-import styles from "./index.module.css";
+import { Header } from "views/Header";
+import { Footer } from "views/Footer";
 const walletPublicKey = "3EqUrFrjgABCWAnqMYjZ36GcktiwDtFdkNYwY6C6cDzy";
 
 export const GalleryView: FC = ({}) => {
@@ -36,70 +36,43 @@ export const GalleryView: FC = ({}) => {
 
   return (
     <div className="container mx-auto max-w-6xl p-8 2xl:px-0">
-      <div className={styles.container}>
-        <div className="navbar mb-2 shadow-lg bg-neutral text-neutral-content rounded-box">
-          <div className="flex-none">
-            <button className="btn btn-square btn-ghost">
-              <span className="text-4xl">🏞</span>
-            </button>
-          </div>
-          <div className="flex-1 px-2 mx-2">
-            <div className="text-sm breadcrumbs">
-              <ul className="text-xl">
-                <li>
-                  <Link href="/">
-                    <a>Templates</a>
-                  </Link>
-                </li>
-                <li>
-                  <span className="opacity-40">NFT Gallery</span>
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div className="flex-none">
-            <WalletMultiButton className="btn btn-ghost" />
-          </div>
-        </div>
+      <div>
+        <Header />
 
-        <div className="text-center pt-2">
+        <div className="pt-2">
           <div className="hero min-h-16 p-0 pt-10">
-            <div className="text-center hero-content w-full">
+            <div className=" hero-content w-full">
               <div className="w-full">
-                <h1 className="mb-5 text-5xl">
+                <h1 className="mb-5 text-5xl font-sans font-bold">
                   NFT Gallery on Solana <SolanaLogo />
                 </h1>
 
                 <div className="w-full min-w-full">
-                  <p className="mb-5">
-                    Here is very basic example of NFT Gallery. It parses
-                    mainnet. <br />
-                    And uses{" "}
+                  <p className="mb-5 font-sans">
+                    Voici un exemple très basique de gallerie NFT. Il analyse le
+                    réseau principal. <br />
+                    Il utilise le paquet de{" "}
                     <a
                       href="https://www.npmjs.com/package/@nfteyez/sol-rayz-react"
                       target="_blank"
-                      className="link font-bold"
+                      className="link font-sans font-bold"
                       rel="noreferrer"
                     >
                       @nfteyez/sol-rayz-react
                     </a>{" "}
-                    package to fetch NFTs for specific wallet.
+                    pour récupérer les NFT pour un portefeuille spécifique.
                   </p>
                   <div>
                     <div className="form-control mt-8">
-                      <label className="input-group input-group-vertical input-group-lg">
-                        <span>Search</span>
+                      <label className="input-group text-xs text-gray-400">
+                        <span>Copier l'adresse de votre portefeuille</span>
                         <div className="flex space-x-2">
                           <input
                             type="text"
-                            placeholder="Enter Wallet Address"
-                            className="w-full input input-bordered input-lg"
+                            placeholder="Entrer l'adresse de votre pourtefeuille"
+                            className="w-full input bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-lg px-4 font-sans text-sm"
                             value={walletToParsePublicKey}
                             onChange={onChange}
-                            style={{
-                              borderRadius:
-                                "0 0 var(--rounded-btn,.5rem) var(--rounded-btn,.5rem)",
-                            }}
                           />
 
                           <SelectAndConnectWalletButton
@@ -110,11 +83,12 @@ export const GalleryView: FC = ({}) => {
                     </div>
                   </div>
                 </div>
-                <div className="my-10">
+                <div className="my-2">
                   {error ? (
                     <div>
-                      <h1>Error Occures</h1>
-                      {(error as any)?.message}
+                      <p className="text-sm text-red-500">
+                        Une erreur est survenue : {(error as any)?.message}
+                      </p>
                     </div>
                   ) : null}
 
@@ -130,6 +104,7 @@ export const GalleryView: FC = ({}) => {
             </div>
           </div>
         </div>
+        <Footer />
       </div>
     </div>
   );
@@ -148,7 +123,7 @@ const NftList = ({ nfts, error }: NftListProps) => {
   if (!nfts?.length) {
     return (
       <div className="text-center text-2xl pt-16">
-        No NFTs found in this wallet
+        Pas de NFT trouvé dans votre portefeuille.
       </div>
     );
   }

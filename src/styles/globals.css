@@ -11,4 +11,8 @@
   .wallet-adapter-button.btn-connect {
     @apply font-sans font-light px-4 py-0 text-sm text-gray-900 dark:text-gray-100 bg-white border-2 border-gray-400 rounded-xl hover:shadow-lg hover:bg-white dark:bg-gray-800 dark:border-gray-700;
   }
+
+  SelectAndConnectWalletButton.btn-connect {
+    @apply font-sans font-light px-4 py-0 text-sm text-gray-900 dark:text-gray-100 bg-white border-2 border-gray-400 rounded-xl hover:shadow-lg hover:bg-white dark:bg-gray-800 dark:border-gray-700;
+  }
 }
