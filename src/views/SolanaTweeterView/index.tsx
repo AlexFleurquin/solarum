@@ -1,8 +1,7 @@
 import Link from "next/link";
 import { FC, useEffect, useState } from "react";
-import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
 import { useAnchorWallet, useConnection } from "@solana/wallet-adapter-react";
-import { HomeIcon, UserIcon } from "@heroicons/react/outline";
+import { HomeIcon, UserIcon } from "@heroicons/react/24/outline";
 import orderBy from "lodash.orderby";
 
 import { Loader, SelectAndConnectWalletButton } from "components";
@@ -83,10 +82,12 @@ export const SolanaTweeterView: FC = ({}) => {
               Airdrop 1 SOL
             </button>
           </div>
-          {isAirDropped ? <div className="opacity-50">Envoyé</div> : null}
+          {isAirDropped ? (
+            <div className="opacity-50">Le SOL faucets a été envoyé</div>
+          ) : null}
         </div>
 
-        <div>
+        <div className="max-w-6xl">
           {!wallet ? (
             <SelectAndConnectWalletButton onUseWalletClick={() => {}} />
           ) : (
@@ -150,28 +151,37 @@ const TwitterScreen = () => {
   const sortedTweets = orderBy(tweets, ["timestamp"], ["desc"]);
 
   return (
-    <div className="rounded-lg shadow flex">
-      <div className="border-r border-gray-500 mr-8">
+    <div className="flex w-full">
+      <div className="mr-8">
         <ul className="menu p-4 overflow-y-auto bg-base-100 text-base-content">
-          <li>
+          <li className="py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-500 hover:rounded-full">
             <a
               className={activeTab === 0 ? "active" : ""}
               onClick={() => setActiveTab(0)}
             >
-              <HomeIcon className="h-8 w-8 text-white-500" />
+              {" "}
+              <div className="flex items-center text-left">
+                <HomeIcon className="h-6 w-6 text-white-500" />
+                <span className="pl-2 font-sans font-bold text-sm">
+                  Accueil
+                </span>
+              </div>
             </a>
           </li>
-          <li>
+          <li className="py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-500 hover:rounded-full">
             <a
               className={activeTab === 1 ? "active" : ""}
               onClick={() => setActiveTab(1)}
             >
-              <UserIcon className="h-8 w-8 text-white-500" />
+              <div className="flex items-center text-left">
+                <UserIcon className="h-7 w-7 text-white-500" />
+                <span className="pl-2 font-sans font-bold text-sm">Profil</span>
+              </div>
             </a>
           </li>
         </ul>
       </div>
-      <div className="flex flex-col items-center justify-center">
+      <div className="flex flex-col items-center justify-center bg-white dark:bg-gray-800 rounded-lg shadow p-6 max-w-6xl">
         {activeTab === 0 ? (
           <div className="text-xs">
             <NetTweet onTweenSent={onTweenSent} />
@@ -220,26 +230,26 @@ const NetTweet: FC<NetTweet> = ({ onTweenSent }) => {
   };
 
   return (
-    <div className="mb-8 pb-4 border-b border-gray-500 flex ">
+    <div className="mb-8 pb-4 border-b border-gray-200 flex ">
       <div className="avatar placeholder mr-4">
-        <div className="mb-4 rounded-full bg-neutral-focus text-neutral-content w-14 h-14">
-          Me
+        <div className="rounded-full bg-gray-100 text-center items-center w-14 h-14">
+          Moi
         </div>
       </div>
       <div className="form-control flex-1 mx-2">
         <textarea
-          className="textarea h-24 w-full text-2xl"
-          placeholder="What's happening?"
+          className="textarea h-16 w-full dark:bg-gray-800 text-xl rounded-lg px-2 py-1"
+          placeholder="Quoi de neuf ?"
           value={content}
           onChange={onContentChange}
         ></textarea>
       </div>
-      <div className="ml-auto">
+      <div className="flex items-end">
         <button
-          className="btn btn-primary rounded-full normal-case	px-16"
+          className="btn bg-white bg-blue-400 font-bold font-sans text-white rounded-full px-4 py-2"
           onClick={onTweetSendClick}
         >
-          Tweet
+          Tweeter
         </button>
       </div>
     </div>
@@ -248,7 +258,7 @@ const NetTweet: FC<NetTweet> = ({ onTweenSent }) => {
 
 const Tweet = ({ content }: any) => {
   return (
-    <div className="mb-8 border-b border-gray-500 flex">
+    <div className="mb-8 border-b border-gray-200 flex max-w-4xl">
       <div className="avatar placeholder mr-4">
         <div className="mb-4 rounded-full bg-neutral-focus text-neutral-content w-14 h-14">
           {content.authorDisplay.slice(0, 2)}
@@ -260,7 +270,7 @@ const Tweet = ({ content }: any) => {
           <div className="mx-2 opacity-50">·</div>
           <div className="opacity-50">{content.createdAgo}</div>
         </div>
-        <div className="text-xl">{content.content}</div>
+        <div className="text-xl font-sans">{content.content}</div>
         {content.topic ? (
           <div className="text-pink-400 my-2">#{content.topic}</div>
         ) : null}
@@ -271,14 +281,14 @@ const Tweet = ({ content }: any) => {
 
 const TwitterProfile = ({ tweets, wallet }: any) => {
   return (
-    <div className="flex-1 text-left width-full">
+    <div className="flex-1 text-left w-full">
       <div>Profile</div>
       <div>{wallet.publicKey.toString()}</div>
 
       <div className="my-8">
         {tweets.length === 0 ? (
           <div className="text-3xl opacity-50 text-center">
-            You have no tweets
+            Il n'y a pas de tweets
           </div>
         ) : null}
         {tweets.map((t: any) => (
