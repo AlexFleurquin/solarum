@@ -5,7 +5,7 @@ import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
 import { useTheme } from "next-themes";
 
 import Image from "next/image";
-import NFT from "assets/images/NFT.jpg";
+import NFT from "assets/images/NFT.jpeg";
 import News from "assets/images/news.png";
 
 import { Logo } from "components";
