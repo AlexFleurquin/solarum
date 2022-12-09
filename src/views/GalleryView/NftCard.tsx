@@ -1,6 +1,6 @@
 import { FC, useState, useEffect } from "react";
 import useSWR from "swr";
-import { EyeOffIcon } from "@heroicons/react/outline";
+import { HomeIcon } from "@heroicons/react/24/outline";
 
 import { fetcher } from "utils/fetcher";
 
