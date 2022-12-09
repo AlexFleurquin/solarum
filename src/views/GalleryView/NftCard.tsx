@@ -52,7 +52,7 @@ export const NftCard: FC<Props> = ({
           // Fallback when preview isn't available
           // This could be broken image, video, or audio
           <div className="w-auto h-48 flex items-center justify-center bg-gray-900 bg-opacity-40">
-            <EyeOffIcon className="h-16 w-16 text-white-500" />
+            <HomeIcon className="h-16 w-16 text-white-500" />
           </div>
         )}
       </figure>
